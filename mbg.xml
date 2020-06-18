@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--重点是targetRuntime的属性选值，生成的策略不同-->
+    <context id="db2Table" defaultModelType="flat" targetRuntime="MyBatis3Simple">
+        <!--注释生成器-->
+        <commentGenerator>
+            <!--关闭所有的注释-->
+            <property name="suppressAllComments" value="true"/>
+            <!--关闭注释时间戳-->
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/designmanger"
+                        userId="root"
+                        password="zhan">
+        </jdbcConnection>
+        <javaModelGenerator targetPackage="zhan.pojo" targetProject=".\src\main\java" >
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--sqlMapGenerator 是生成mapper的xml文件的，只有当javaClientGenerator的type选择为xmlmapper时才生效-->
+        <sqlMapGenerator targetPackage="zhan.mapper" targetProject="src/main/resources"/>
+        <!--生成mapper接口-->
+        <javaClientGenerator targetPackage="zhan.mapper" targetProject=".\src\main\java" type="ANNOTATEDMAPPER"></javaClientGenerator>
+        <table tableName="t_student" domainObjectName="Student"></table>
+        <table tableName="t_teacher" domainObjectName="Teacher"></table>
+        <table tableName="t_clazz" domainObjectName="Clazz"></table>
+        <table tableName="t_admin" domainObjectName="Admin"></table>
+    </context>
+</generatorConfiguration>
